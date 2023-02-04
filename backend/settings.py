@@ -14,7 +14,6 @@ import os
 from pathlib import Path
 from decouple import config
 
-import dj_database_url
 
 
 
@@ -31,7 +30,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["metalex-production.up.railway.app","metalex-production.up.railway.app/", "localhost:8000", "localhost:8000/"]
 
 
 # Application definition
@@ -45,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic', 
     'django.contrib.staticfiles',
+    'cloudinary_storage',
+    'cloudinary',
     
     
     
@@ -66,8 +67,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'django_summernote',
-#     'cloudinary',
-#     'cloudinary_storage',
+   
     
 
 
@@ -101,9 +101,9 @@ SIMPLE_JWT = {
 
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-     'whitenoise.middleware.WhiteNoiseMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -115,9 +115,9 @@ MIDDLEWARE = [
     
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_ALL_ORIGINS = True
 
-# CORS_ORIGIN_WHITELIST = ["http://localhost:3000", "https://lexq-front.herokuapp.com", "http://lexq-front.herokuapp.com"]
+CORS_ORIGIN_WHITELIST = ["https://metalex-production.up.railway.app", "https://metalex-production.up.railway.app/", "http://localhost:8000", "http://localhost:8000/"]
 
 
 ROOT_URLCONF = 'backend.urls'
@@ -149,9 +149,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': 'nPNb8RQU0ANtqlPxmP5K',
-        'HOST':'containers-us-west-94.railway.app',
-        'PORT':'7032'
+        'PASSWORD': 'Z7HCJSPysQEAF1t7DC8m',
+        'HOST':'containers-us-west-49.railway.app',
+        'PORT':'7814'
     }
 }
 
@@ -222,15 +222,16 @@ MEDIA_ROOT = 'static/media'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.RawMediaCloudinaryStorage'
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.RawMediaCloudinaryStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
-# CLOUDINARY_STORAGE = {
-#     'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
-#     'API_KEY':config('CLOUDINARY_API_KEY'),
-#     'API_SECRET': config('CLOUDINARY_API_SECRET')
-# }
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY':config('CLOUDINARY_API_KEY'),
+    'API_SECRET': config('CLOUDINARY_API_SECRET')
+}
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
