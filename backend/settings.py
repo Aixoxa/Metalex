@@ -30,7 +30,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["metalex-production.up.railway.app","metalex-production.up.railway.app/", "localhost:8000", "localhost:8000/"]
+ALLOWED_HOSTS = ["metalex-production.up.railway.app","metalex-production.up.railway.app/"]
 
 
 # Application definition
@@ -117,7 +117,7 @@ MIDDLEWARE = [
 
 # CORS_ALLOW_ALL_ORIGINS = True
 
-CORS_ORIGIN_WHITELIST = ["https://metalex-production.up.railway.app", "https://metalex-production.up.railway.app/", "http://localhost:8000", "http://localhost:8000/"]
+CORS_ORIGIN_WHITELIST = ["https://metalex-production.up.railway.app", "https://metalex-production.up.railway.app/"]
 
 
 ROOT_URLCONF = 'backend.urls'
