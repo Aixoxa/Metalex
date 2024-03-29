@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 from decouple import config
+import dj_database_url
 
 
 
@@ -30,7 +31,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["metalex-production.up.railway.app","metalex-production.up.railway.app/"]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -92,7 +93,7 @@ from datetime import timedelta
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=20),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
     'ALGORITHM': 'HS256',
@@ -117,7 +118,7 @@ MIDDLEWARE = [
 
 # CORS_ALLOW_ALL_ORIGINS = True
 
-CORS_ORIGIN_WHITELIST = ["https://metalex-production.up.railway.app", "https://metalex-production.up.railway.app/"]
+CORS_ORIGIN_WHITELIST = [".onrender.com"]
 
 
 ROOT_URLCONF = 'backend.urls'
@@ -145,14 +146,8 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'Z7HCJSPysQEAF1t7DC8m',
-        'HOST':'containers-us-west-49.railway.app',
-        'PORT':'7814'
-    }
+    'default': dj_database_url.parse(config('DATABASE_URL'))
+    
 }
 
 # DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
